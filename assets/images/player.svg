@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <!-- Oyuncu karakteri - basit kare -->
+    <rect x="16" y="16" width="32" height="32" fill="#4CAF50" stroke="#2E7D32" stroke-width="2" />
+    <!-- Gözler -->
+    <circle cx="24" cy="24" r="2" fill="#000" />
+    <circle cx="40" cy="24" r="2" fill="#000" />
+    <!-- Ağız -->
+    <path d="M 24 36 Q 32 40 40 36" stroke="#000" stroke-width="2" fill="none" />
+</svg>
