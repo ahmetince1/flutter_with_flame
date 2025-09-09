@@ -29,7 +29,9 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Ayarlar'), backgroundColor: Theme.of(context).colorScheme.inversePrimary),
-      body: const Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('Ayarlar ekranı'), Text('Burada oyun ayarları olacak')])),
+      body: const Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('Ayarlar ekranı'), Text('Burada oyun ayarları olacak')]),
+      ),
     );
   }
 }

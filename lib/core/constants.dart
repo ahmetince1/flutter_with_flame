@@ -2,32 +2,43 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
 class GameConstants {
-  // Component boyutları
-  static const double squareSize = 100.0;
-  static const double movingSquareSize = 60.0;
-  static const double circleRadius = 25.0;
+  // Oyun boyutları
+  static const double screenWidth = 400.0;
+  static const double screenHeight = 800.0;
+
+  // Kulvar sistemi
+  static const double laneWidth = 120.0; // Her kulvarın genişliği
+  static const double leftLaneX = 40.0; // Sol kulvar X pozisyonu
+  static const double centerLaneX = 160.0; // Orta kulvar X pozisyonu
+  static const double rightLaneX = 280.0; // Sağ kulvar X pozisyonu
+
+  // Karakter boyutları
+  static const double playerWidth = 60.0;
+  static const double playerHeight = 80.0;
+  static const double backgroundTileHeight = 100.0;
 
   // Hız ayarları
-  static const double velocityMultiplier = 0.5; // 5x daha hızlı
+  static const double backgroundSpeed = 200.0; // Arkaplan hızı (pixel/saniye)
+  static const double playerSpeed = 300.0; // Oyuncu hareket hızı
 
   // Pozisyonlar
-  static final Vector2 redSquarePosition = Vector2(50, 50);
-  static final Vector2 blueRectanglePosition = Vector2(200, 100);
-  static final Vector2 movingSquarePosition = Vector2(300, 200);
+  static final Vector2 playerStartPosition = Vector2(centerLaneX, 550); // Oyun alanının içinde
+  static final Vector2 backgroundStartPosition = Vector2(0, -backgroundTileHeight);
 
   // Boyutlar
-  static final Vector2 redSquareSize = Vector2(100, 100);
-  static final Vector2 blueRectangleSize = Vector2(150, 80);
-  static final Vector2 movingSquareSizeVector = Vector2(60, 60);
+  static final Vector2 playerSize = Vector2(playerWidth, playerHeight);
+  static final Vector2 backgroundTileSize = Vector2(screenWidth, backgroundTileHeight);
 
   // Renkler
-  static const Color redSquareColor = Colors.red;
-  static const Color blueRectangleColor = Colors.blue;
-  static const Color movingSquareColor = Colors.orange;
-  static const Color tapCircleColor = Colors.green;
+  static const Color playerColor = Colors.green;
+  static const Color backgroundTileColor = Colors.orange;
+  static const Color tapCircleColor = Colors.blue;
 
   // Oyun ayarları
   static const double gameSpeed = 1.0;
   static const int maxLives = 3;
   static const int maxScore = 999999;
+
+  // Kulvar pozisyonları listesi
+  static const List<double> lanePositions = [leftLaneX, centerLaneX, rightLaneX];
 }

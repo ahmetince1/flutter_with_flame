@@ -1,19 +1,17 @@
-import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_with_flame/game/components/player.dart';
 
-import '../core/constants.dart';
 import 'scenes/main_scene.dart';
 
-/// Ana oyun sınıfı
-class MyGame extends FlameGame with TapCallbacks {
+class MyGame extends FlameGame with DragCallbacks {
+  Player? _cachedPlayer;
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
 
     try {
-      // Ana sahneyi ekle
       add(MainScene());
     } catch (e) {
       print('Oyun yükleme hatası: $e');
@@ -21,29 +19,37 @@ class MyGame extends FlameGame with TapCallbacks {
   }
 
   @override
-  bool onTapDown(TapDownEvent event) {
-    try {
-      // Dokunulan yere yeşil daire ekle
-      add(CircleComponent(position: event.localPosition, radius: GameConstants.circleRadius, paint: Paint()..color = GameConstants.tapCircleColor));
-      print('Dokunma algılandı: ${event.localPosition}');
-      return true; // Olayın işlendiğini belirtir
-    } catch (e) {
-      print('Tap handling hatası: $e');
-      return false;
-    }
-  }
-
-  @override
-  bool onTapUp(TapUpEvent event) {
-    // Dokunma kaldırıldığında yapılacak işlemler
-    print('Dokunma bitti: ${event.localPosition}');
+  bool onDragStart(DragStartEvent event) {
+    super.onDragStart(event);
     return true;
   }
 
   @override
-  bool onTapCancel(TapCancelEvent event) {
-    // Dokunma iptal edildiğinde yapılacak işlemler
-    print('Dokunma iptal edildi');
+  bool onDragUpdate(DragUpdateEvent event) {
+    super.onDragUpdate(event);
+
+    _cachedPlayer ??= children.whereType<MainScene>().first.children.whereType<Player>().firstOrNull;
+    final player = _cachedPlayer;
+
+    if (player != null) {
+      final deltaX = event.localDelta.x;
+      final currentLane = player.currentLane;
+
+      if (deltaX.abs() > 5) {
+        if (deltaX > 0 && currentLane < 2) {
+          player.moveToLane(currentLane + 1);
+        } else if (deltaX < 0 && currentLane > 0) {
+          player.moveToLane(currentLane - 1);
+        }
+      }
+    }
+
+    return true;
+  }
+
+  @override
+  bool onDragEnd(DragEndEvent event) {
+    super.onDragEnd(event);
     return true;
   }
 }

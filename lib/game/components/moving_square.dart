@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants.dart';
 import '../../core/utils.dart';
 
 /// Hareketli kare component'i
@@ -16,7 +15,7 @@ class MovingSquare extends RectangleComponent with HasGameReference {
 
     try {
       // Daha tutarlı hız hesaplama
-      velocity = GameUtils.randomVelocity(game.size.x * GameConstants.velocityMultiplier);
+      velocity = GameUtils.randomVelocity(game.size.x * 0.5);
     } catch (e) {
       print('MovingSquare yükleme hatası: $e');
       // Varsayılan hız

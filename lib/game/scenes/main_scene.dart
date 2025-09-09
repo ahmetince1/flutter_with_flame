@@ -1,32 +1,28 @@
 import 'package:flame/components.dart';
 
 import '../../core/constants.dart';
-import '../components/controllable_rectangle.dart';
-import '../components/moving_square.dart';
-import '../components/static_rectangle.dart';
+import '../components/falling_arrows.dart';
+import '../components/player.dart';
+import '../components/simple_scrolling_background.dart';
 
-/// Ana oyun sahnesi
-class MainScene extends Component {
-  late StaticRectangle redSquare;
-  late ControllableRectangle blueRectangle;
+class MainScene extends Component with HasGameReference {
+  late Player player;
+  late SimpleScrollingBackground background;
+  late FallingArrows fallingArrows;
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
 
     try {
-      // Kırmızı kare oluştur
-      redSquare = StaticRectangle(position: GameConstants.redSquarePosition, size: GameConstants.redSquareSize, color: GameConstants.redSquareColor);
+      background = SimpleScrollingBackground();
+      add(background);
 
-      // Mavi dikdörtgen oluştur (kontrol edilebilir)
-      blueRectangle = ControllableRectangle(position: GameConstants.blueRectanglePosition, size: GameConstants.blueRectangleSize, color: GameConstants.blueRectangleColor);
+      fallingArrows = FallingArrows();
+      add(fallingArrows);
 
-      // Component'leri sahneye ekle
-      add(redSquare);
-      add(blueRectangle);
-
-      // Hareketli kare ekle
-      add(MovingSquare(position: GameConstants.movingSquarePosition, size: GameConstants.movingSquareSizeVector, color: GameConstants.movingSquareColor));
+      player = Player(position: Vector2(GameConstants.centerLaneX, 590), size: GameConstants.playerSize, color: GameConstants.playerColor);
+      add(player);
     } catch (e) {
       print('MainScene yükleme hatası: $e');
     }
