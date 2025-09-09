@@ -20,7 +20,7 @@ class MovingSquare extends RectangleComponent with HasGameReference {
     } catch (e) {
       print('MovingSquare yükleme hatası: $e');
       // Varsayılan hız
-      velocity = Vector2(50, 50);
+      velocity = Vector2(200, 200);
     }
   }
 
